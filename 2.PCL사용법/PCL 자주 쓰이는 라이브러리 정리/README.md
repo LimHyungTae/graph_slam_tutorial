@@ -8,7 +8,9 @@ Hyungjin Kim (hjkim86@kaist.ac.kr)
 
 -----------
 
-## Conversion
+## 형 변환(Type Conversion)
+
+ROS상에서 LiDAR 센서들은 sensor_msgs::PointCloud2나 Sensor_msgs::LaserScan(2D LiDAR의 경우) 타입을 통해 데이터가 들어오기 때문에, pcl을 통해 pointcloud를 다루기 위해서는 pcl::PointCloud로 형변환을 해줘야 한다.
 
 ### sensor_msgs::PointCloud2 :arrow_right: pcl::PointCloud
 ```cpp
@@ -46,9 +48,10 @@ sensor_msgs::PointCloud2 laser2cloudmsg(sensor_msgs::LaserScan laser)
     }
 ```
 
-## Transformation
+## 변환 행렬 곱하기(Transformation)
 ![tf](../img/pcl_robot_sensor.PNG)
 
+로보틱스에는 다양한 좌표계가 존재한다. 따라서 센서 데이터를 취득한 후 원하는 좌표계에 변환(transformation)을 하기 위해서는 아래와 같은 코드를 사용하면 Eigen::Matrix4f trans만큼 모든 포인트클라우드가 변환된다.
 ```cpp
 //Input: pcl::PointCloud source, cloud_src
 //Output: Transformed pcl::PointCloud, pc_transformed via 4x4 transformation matrix
@@ -66,7 +69,7 @@ pcl::transformPointCloud(cloud_src, *ptr_transformed, trans);
 pc_transformed = *ptr_transformed
 ```
 
-## Filtering using a PassThrough Filter
+## 지정 축에 대해 포인트 클라우드 필터링하기(Filtering using a PassThrough Filter)
 
 ```cpp
 #include <pcl/filters/passthrough.h>
@@ -91,8 +94,8 @@ filter.filter(*ptr_filtered);
 pc_filtered = *ptr_filtered;
 ```
 
-
 ## Downsampling to a Voxel Grid
+
 ![centroid](../img/pcl_centroid.PNG)
 ```cpp
 #include <pcl/filters/voxel_grid.h>
