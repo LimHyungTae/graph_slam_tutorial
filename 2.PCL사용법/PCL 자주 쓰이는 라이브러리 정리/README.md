@@ -51,7 +51,7 @@ sensor_msgs::PointCloud2 laser2cloudmsg(sensor_msgs::LaserScan laser)
 ## 변환 행렬 곱하기(Transformation)
 ![tf](../img/pcl_robot_sensor.PNG)
 
-로보틱스에는 다양한 좌표계가 존재한다. 따라서 센서 데이터를 취득한 후 원하는 좌표계에 변환(transformation)을 하기 위해서는 아래와 같은 코드를 사용하면 Eigen::Matrix4f trans만큼 모든 포인트클라우드가 변환된다.
+로보틱스에는 다양한 좌표계가 존재한다. 위의 사진의 경우만 봐도 센서 데이터는 센서의 원점을 기준으로 데이터를 얻는다. 하지만 우리가 실제로 요하는 것 로봇의 body 기준의 정보들이기 때문에, 센서 데이터를 취득한 후 원하는 좌표계에 변환(transformation)을 해주어야 한다. 변환을 할  아래와 같은 코드를 사용하면 Eigen::Matrix4f trans만큼 모든 포인트클라우드가 변환된다.
 ```cpp
 //Input: pcl::PointCloud source, cloud_src
 //Output: Transformed pcl::PointCloud, pc_transformed via 4x4 transformation matrix
