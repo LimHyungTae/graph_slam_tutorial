@@ -43,7 +43,7 @@ int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
     return EXIT_SUCCESS;
 }
 ```
-아래 2줄 추가해줘야 함!
+아래 header의 stamp를 찍어주는 2줄 추가해줘야 함!
 ```cpp
 int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
     auto lidar_packet_pub = nh.advertise<PacketMsg>("lidar_packets", 1280);
