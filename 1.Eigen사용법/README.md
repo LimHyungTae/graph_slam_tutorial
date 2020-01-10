@@ -1,4 +1,4 @@
-# PCL cheat sheet(1/2)
+# Eigen on Robotics
 
 Original author: Hyungtae Lim (shapelim@kaist.ac.kr)   
 
@@ -19,37 +19,41 @@ pcl상의 PointCloud pcl::PointCloud<T>에는 다양한 type을 담을 수 있�
 http://www.pointclouds.org/documentation/tutorials/adding_custom_ptype.php#adding-custom-ptype
 
 ```cpp
-pcl::PointCloud<pcl::PointXYZ> cloud;
-pcl::PointCloud<pcl::PointXYZI> cloud;
-pcl::PointCloud<pcl::PointNormal> cloud;
-```
+MatrixXd m(2,2);
+  double c= 3;
 
-{% highlight ruby %}
-pcl::PointCloud<pcl::PointXYZ> cloud;
-pcl::PointCloud<pcl::PointXYZI> cloud;
-pcl::PointCloud<pcl::PointNormal> cloud;
-{% endhighlight %}
+  m << 2, c,
+       4, 5;
+  VectorXd v(2);
+  v <<1, 3;
+
+  VectorXd vv= m.transpose() * v;
+  cout<<m<<endl;
+  cout<<v<<endl;
+  cout<<vv<<endl;
+  cout<<vv(0)<< " , "<< vv(1)<<endl;
+```
 
 ```cpp
-pcl::PointXYZ point_xyz;
-point_xyz.x = 1;
-point_xyz.y = 2;
-point_xyz.z = 3;
-```
-혹은 아래와 같이 한 줄로 선언할 수도 있다.
-```cpp 
+MatrixXd m(2,2);
+  double c= 3;
 
-pcl::PointXYZ point_xyz = {1, 2, 3}; // 1, 2, 3이 각각 x, y, z로 지정된다.
+  m << 2, c,
+       4, 5;
+  VectorXd v(2);
+  v <<1, 3;
+
+  VectorXd vv= m.transpose() * v;
+  cout<<m<<endl;
+  cout<<v<<endl;
+  cout<<vv<<endl;
+  cout<<vv(0)<< " , "<< vv(1)<<endl;
 ```
 
 아래의 예시들은 다음과 같이 header file과 namespace가 선언되어 있다고 가정한다.
 ```cpp
-#include <pcl_conversions/pcl_conversions.h>
-#include <pcl/point_types.h>
-#include <pcl/PCLPointCloud2.h>
-#include <pcl/conversions.h>
-
-using namespace std;
+cout<<mat_rp_pc.rows()<<endl;
+cout<<mat_rp_pc.cols()<<endl;
 ```
 
 ### pcl::PointCloud 선언해서 Points에 Point 넣는 법
@@ -59,21 +63,31 @@ using namespace std;
 왜냐하면 pcl의 내부를 살펴보면 std::vector로 구성되어 있기 때문이다 (http://docs.pointclouds.org/trunk/classpcl_1_1_point_cloud.html 참조)
 
 ```cpp
-pcl::PointCloud<pcl::PointXYZ> cloud;
-cloud.resize(3); //cloud의 size를 3으로 설정 
+Eigen::Matrix4Xf transform_test(4, 4);
+  transform_test<< 1, 0, 0, 2,
+                   4, 4, 4, 4,
+                   0, -1, 2, 3,
+                   3, 2, -5, 2;
+  cout<<transform_test<<endl;
 
-cloud.points[0].x = 1;
-cloud.points[0].y = 2;
-cloud.points[0].z = 3;
+  Eigen::Matrix4Xf transform_test_2(4, 4);
+  transform_test_2<< 1, 0, 0, 2,
+                     4, 4, 4, 4,
+                     0, -1, 2, 3,
+                     3, 2, -5, 2;
 
-cloud.points[1].x = 4;
-cloud.points[1].y = 5;
-cloud.points[1].z = 6;
+  Eigen::Matrix4Xf transform_test_3;
+  transform_test_3 = transform_test * transform_test_2;
+  cout<<transform_test_3<<endl;
 
-cloud.points[2].x = 7;
-cloud.points[2].y = 8;
-cloud.points[2].z = 9;
+  Eigen::Matrix4Xf transform_test_4(4, 1);
+  transform_test_4<< 1,
+                     4,
+                     0,
+                    -5;
 
+  transform_test_4 = transform_test_3 * transform_test_4;
+  cout<<transform_test_4<<endl;
 ```
 
 or
@@ -280,55 +294,5 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr ptr_cloud(new pcl::PointCloud<pcl::PointXYZ>
 *ptr_cloud = cloud2;
 
 cout<<"Original: "<<endl;
-for (int i = 0 ; i < cloud3.size(); ++i){
-cout << i << ": ";
-cout << cloud3.points[i].x << ", ";
-cout << cloud3.points[i].y << ", ";
-cout << cloud3.points[i].z << endl;
-}
-
-cloud3 = *ptr_cloud;
-
-cout << "After: " << endl;
-//  cout<<"size: " << cloud3.size() << endl;
-for (int i = 0 ; i < cloud3.size(); ++i){
-cout << i << ": ";
-cout << cloud3.points[i].x << ", ";
-cout << cloud3.points[i].y << ", ";
-cout << cloud3.points[i].z << endl;
-}
 ```
-##### Result: <br/>
-Original: <br/>
-0: 7, 8, 9 <br/>
-1: 10, 11, 12 <br/>
-After: <br/> 
-0: 1, 2, 3 <br/>
-1: 4, 5, 6 <br/>
-2: 7, 8, 9 <br/>
-3: 10, 11, 12
-
-### +=는 값을 할당하는 걸까, 복사하는 걸까?
-
-```cpp
-cloud3.push_back(pcl::PointXYZ(12, 13, 14));
-cout<<"After: "<<endl;
-  for (int i = 0 ; i < cloud2.size(); ++i){
-  cout<<i<<": ";
-  cout<<cloud2.points[i].x<<", ";
-  cout<<cloud2.points[i].y<<", ";
-  cout<<cloud2.points[i].z<<endl;
-  }
-}
-```
-##### Result: <br/>
-After: <br/> 
-0: 1, 2, 3 <br/>
-1: 4, 5, 6 <br/>
-2: 7, 8, 9 <br/>
-3: 10, 11, 12
-
-그대로임을 알 수 있다. 즉, 주소를 할당받아 link되어 있지 않고, points들을 통째로 복사해오는 것임.
-
-
 
