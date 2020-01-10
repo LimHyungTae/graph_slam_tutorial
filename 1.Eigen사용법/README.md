@@ -2,21 +2,23 @@
 
 Original author: Hyungtae Lim (shapelim@kaist.ac.kr)   
 
-
+# WBU
 ----------------
 
-## PCL 선언하는 법 & T Type
+## Eigen library를 사용하는 이유
 
-### T Type
+ROS 상에서 로봇의 pose 값은 [nav_msgs/Odometry](http://docs.ros.org/melodic/api/nav_msgs/html/msg/Odometry.html)나 [geometry_msgs/PoseStamped](http://docs.ros.org/melodic/api/geometry_msgs/html/msg/PoseStamped.html) 타입으로 데이터를 제공하는데, 이 메세지를 C++ 상에서 활용할 때 Eigen의 Matrix로 변환해서 사용하면 편하다. 왜냐하면 4x4 변환행렬(transformation matrix)로 pose를 표현하게 되면 상대적인 pose를 구할 때나(e.g. t-1의 pose와 t의 pose를 pre_pose, curr_pose라는 이름의 Matrix4f로 변환했을 때, prev_pose.inverse() * curr_pose를 하면 t-1 pose의 관점에서 t의 pose를 바라봤을 때의 상대적인 포즈를 손쉽게 구할 수 있음 ) pose의 좌표계의 변환이 굉장히 용이해지기 때문.
 
-pcl상의 PointCloud pcl::PointCloud<T>에는 다양한 type을 담을 수 있는데,
+* 내용 참조: [Introduction to Robotics chapter 2 읽기](http://www.mech.sharif.ir/c/document_library/get_file?uuid=5a4bb247-1430-4e46-942c-d692dead831f&groupId=14040)
 
-주로 **LiDAR**를 사용할 때는 *pcl::PointXYZ, pcl::PointXYZI*를 많이 사용한다.
 
-**RGB-D나 스테레오 카메라**는 depth를 image에 align시키면 point의 색깔도 알 수 있기 때문에 *pcl::PointXYZRGB(A)*를 사용하는 경우도 있다.
+### 선언
+```cpp
+Eigen::Matrix4f m4x4;
+Eigen::Matrix4f m4x4;
+Eigen::Matrix3d& eigen3x3
+```
 
-더 다양한 type은 원래 pcl tutorial 페이지에서 확인할 수 있다. <br/>
-http://www.pointclouds.org/documentation/tutorials/adding_custom_ptype.php#adding-custom-ptype
 
 ```cpp
 MatrixXd m(2,2);
