@@ -7,4 +7,4 @@
 WBU
 
 
-<pre><code>roslaunch os1.launch replay:=true</pre></code>
+<pre><code>roslaunch /home/shapelim/catkin_ws/src/ouster_example-master/ouster_ros/os1.launch replay:=true</pre></code>
