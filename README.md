@@ -6,7 +6,7 @@
 
 WBU
 
-자칼의 xyz가 이상함!!!
+자칼의 xyz가 이상함!!! 거꾸로 가는듯한 느낌이 있음
 
 <pre><code>rosparam set use_sim_time true</code></pre>
 
