@@ -55,6 +55,7 @@ sensor_msgs::PointCloud2 laser2cloudmsg(sensor_msgs::LaserScan laser)
 ```cpp
 //Input: pcl::PointCloud source, cloud_src
 //Output: Transformed pcl::PointCloud, pc_transformed via 4x4 transformation matrix
+#include <pcl/common/transforms.h>
 
 pcl::PointCloud<pcl::PointXYZ> pc_transformed;
 pcl::PointCloud<pcl::PointXYZ>::Ptr ptr_transformed(new pcl::PointCloud<pcl::PointXYZ>);
