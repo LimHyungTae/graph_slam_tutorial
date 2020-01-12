@@ -6,6 +6,8 @@
 
 WBU
 
+자칼의 xyz가 이상함!!!
+
 <pre><code>rosparam set use_sim_time true</code></pre>
 
 
