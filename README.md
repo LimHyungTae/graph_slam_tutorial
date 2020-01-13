@@ -14,3 +14,7 @@ WBU
 <pre><code>rosbag play A4.bag --clock</code></pre>
 
 <pre><code>roslaunch /home/shapelim/catkin_ws/src/ouster_example-master/ouster_ros/os1.launch replay:=true</code></pre>
+
+leaf size is too small!!
+
+-> 0.2 이상으로 키우면 된다.
