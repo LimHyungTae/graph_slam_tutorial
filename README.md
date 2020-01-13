@@ -20,4 +20,4 @@ leaf size is too small!!
 -> 0.2 이상으로 키우면 된다.
 
 
-icp: ![tf](tf.png) , 즉 target의 관점에서 바라본 source가 계산됨
+icp: source의 관점에서 target을 바라볼 때의 tf가 계산됨!
