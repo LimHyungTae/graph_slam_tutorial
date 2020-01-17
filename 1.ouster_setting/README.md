@@ -33,48 +33,28 @@
 
 <pre><code>roslaunch /home/($user_name)/catkin_ws/src/ouster_example-master/ouster_ros/os1.launch replay:=true</code></pre>
     
-**그런데...막상 launch file을 실행하면 아래와 같이 문제가 발생한다!!!!**
+**그런데...막상 launch file을 실행하면 아래와 같이 md5sum 에러가 발생한다!!!!**
     
 ![error_occurs](/readme_materials/ouster_error.png)    
     
 ## 문제가 발생하는 이유?
 
-Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 있지 않고, 그로 인해 ROS 상에서 data를 받게 되면 error가 발생한다. 
+Ouster 사에서 제공하는 driver 내의 패킷 메세지 내에 msg 상에 header가 포함되어 있지 않기 때문에 발생하는 것으로 보인다. 그로 인해서, packet data를 sensor_msgs로 변환할 때 ROS 상에서는 data 시간에 대한 정보가 없는 패킷을 받기 때문에 error가 발생시키는 것이다. 
 
-다시 말하자면, 센서의 드라이버 내에서 TimeStamp를 찍어주지 않기 때문에 그 부분을 수정해줘야 함!
+다시 말하자면, **Ouster사에서 제공하는 드라이버 내에서 TimeStamp를 찍어주지 않기 때문에 발생하는 에러**로 보인다. 따라서 그 부분을 수정해줘야 한다.
 
-## Solution
+## 해결책
 
-1. 
-2. Ouster_ros 안의msg/PacketMsg.msg내에 <code>Header header</code> 추가해야 함.
+1. Ouster_ros 폴더 내의 **msg/PacketMsg.msg**내에 <code>std_msgs/Header header</code> 추가해야 함.
 
-3. Ouster_ros 안의msg/os1_node.cpp내에서  
+2. Ouster_ros 안의**src/os1_node.cpp**내에서 119번째 줄과 125번 줄에 
 
-<code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
-
-<code>imu_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
+<pre><code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
+<code>imu_packet.header.stamp.fromSec(ros::Time::now().toSec());</code></pre>
 
 를 추가해줘야 한다.
 
 원 파일의 일부분은 아래와 같다.
-
-
-
-<code>catkin make ouster_ros</code>
-
-1. Ouster 사에서 제공하는 driver를 git clone한다. (2020-01-09 기준)
-
-<code>git clone https://github.com/ouster-lidar/ouster_example</code>
-
-2. Ouster_ros 안의msg/PacketMsg.msg내에 <code>Header header</code> 추가해야 함.
-
-3. Ouster_ros 안의src/os1_node.cpp내에서 119번째 줄과 125번 줄에  
-
-<code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
-
-<code>imu_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
-
-를 추가해줘야 한다.
 
 
 ```cpp
@@ -113,7 +93,9 @@ int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
     return EXIT_SUCCESS;
 }
 ```
-아래와 같이 두 줄을 추가해주면 데이터를 받는데에 문제를 해결할 수 있다.
+
+여기서 아래와 같이 119번째 줄과 125번 줄에 두 줄을 추가해주면 문제를 해결할 수 있다.
+
 ```cpp
 int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
     auto lidar_packet_pub = nh.advertise<PacketMsg>("lidar_packets", 1280);
@@ -152,3 +134,5 @@ int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
     return EXIT_SUCCESS;
 }
 ```
+
+## 결과
