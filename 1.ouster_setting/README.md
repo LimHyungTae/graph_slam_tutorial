@@ -25,7 +25,7 @@
     
 **그런데...막상 launch file을 실행하면 아래와 같이 문제가 발생한다**
     
-![image](readme_materials/ouster_error.png)    
+![error_occurs](/readme_materials/ouster_error.png)    
     
 ## 문제가 발생하는 이유?
 
