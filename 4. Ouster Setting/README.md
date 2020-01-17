@@ -8,6 +8,8 @@ Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 
 
 ## Solution
 
+<code>catkin make ouster_ros</code>
+
 1. Ouster 사에서 제공하는 driver를 git clone한다. (2020-01-09 기준)
 
 <code>git clone https://github.com/ouster-lidar/ouster_example</code>
