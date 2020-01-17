@@ -1,5 +1,7 @@
 # Setting of Ouster OS1-64
 
+예시 [Ouster rosbag file](https://www.dropbox.com/s/9gofcgfzaa8oyft/ouster_example.bag?dl=0)을 다운 가능!
+
 ## 문제가 발생하는 이유?
 
 Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 있지 않고, 그로 인해 ROS 상에서 data를 받게 되면 error가 발생한다. 
