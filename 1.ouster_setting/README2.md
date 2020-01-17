@@ -6,23 +6,7 @@ Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 
 
 다시 말하자면, 센서의 드라이버 내에서 TimeStamp를 찍어주지 않기 때문에 그 부분을 수정해줘야 함!
 
-## Solution
 
-<code>catkin make ouster_ros</code>
-
-1. Ouster 사에서 제공하는 driver를 git clone한다. (2020-01-09 기준)
-
-<code>git clone https://github.com/ouster-lidar/ouster_example</code>
-
-2. Ouster_ros 안의msg/PacketMsg.msg내에 <code>Header header</code> 추가해야 함.
-
-3. Ouster_ros 안의src/os1_node.cpp내에서 119번째 줄과 125번 줄에  
-
-<code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
-
-<code>imu_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
-
-를 추가해줘야 한다.
 
 원 파일의 일부분은 아래와 같다.
 ```cpp
