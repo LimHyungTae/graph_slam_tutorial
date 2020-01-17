@@ -53,10 +53,10 @@ Ouster 사에서 제공하는 driver 내의 패킷 메세지 내에 msg 상에 h
 <code>uint8[] buf<code></pre>
 
 2. Ouster_ros 안의**src/os1_node.cpp**내에서 119번째 줄과 125번 줄에 
-```cpp
+
 <pre><code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
 <code>imu_packet.header.stamp.fromSec(ros::Time::now().toSec());</code></pre>
-```
+
 를 추가해줘야 한다.
 
 원 파일의 일부분은 아래와 같다.
