@@ -16,7 +16,7 @@ Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 
 
 2. Ouster_ros 안의msg/PacketMsg.msg내에 <code>Header header</code> 추가해야 함.
 
-3. Ouster_ros 안의msg/os1_node.cpp내에서  
+3. Ouster_ros 안의src/os1_node.cpp내에서 119번째 줄과 125번 줄에  
 
 <code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
 
