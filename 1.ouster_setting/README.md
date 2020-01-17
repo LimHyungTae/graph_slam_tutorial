@@ -17,11 +17,15 @@
 
 2. 그 후 catkin_ws로 이동하여 complie해준다.
 
-<pre><code>$ cd /home/$usr_name/catkin_ws</code></pre>
-<pre><code>$ catkin_make ouster_ros</code></pre>
+<pre><code>$ cd /home/$usr_name/catkin_ws</code>
+<code>$ catkin_make ouster_ros</code></pre>
 
 혹은, catkin-tools를 이용하면 아래와 같이 컴파일 하면 된다.
 <pre><code>$ catkin build ouster_ros</code></pre>
+    
+**그런데...막상 launch file을 실행하면 아래와 같이 문제가 발생한다**
+    
+![image](readme_materials/ouster_error.png)    
     
 ## 문제가 발생하는 이유?
 
