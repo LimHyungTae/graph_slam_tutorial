@@ -148,7 +148,7 @@ int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
 
 sensor_smgs/PointCloud2로 잘 파싱되어 있는 것을 확인할 수 있고, 바로 rviz를 통해서도 데이터를 육안으로 확인이 가능하다. 
 
-~~(새벽 한 시에 데이터를 수정하고 데이터를 얻었어서...눈갱 죄송합니다)~~
+~~(새벽 한 시에 수정하고 데이터를 얻었어서...눈갱 죄송합니다)~~
 
 ![ouster_type](/readme_materials/ouster_type.png)
 
