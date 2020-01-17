@@ -1,7 +1,29 @@
 # Setting of Ouster OS1-64
 
-예시 [Ouster rosbag file](https://www.dropbox.com/s/9gofcgfzaa8oyft/ouster_example.bag?dl=0)을 다운 가능!
+## 현 Ouster사에서 제공하는 driver를 통해 데이터를 받아보자 
 
+작성자: 임형태(shapelim@kaist.ac.kr), 박주현(mcvjoohyun@kaist.ac.kr)
+
+----
+
+예시 Ouster Rosbag 파일은 [여기](https://www.dropbox.com/s/9gofcgfzaa8oyft/ouster_example.bag?dl=0)를 통해 다운 가능하다(2020-01-20 기준)
+
+## How to install(세팅 하는 법)
+
+1. 먼저, Ouster 사에서 제공하는 driver를 catkin_ws/src 내에서 git clone한다. (2020-01-09 기준)
+
+<pre><code>$ cd /home/$usr_name/catkin_ws/src</code></pre>
+
+<pre><code>$ git clone https://github.com/ouster-lidar/ouster_example</code></pre>
+
+2. 그 후 catkin_ws로 이동하여 complie해준다.
+
+<pre><code>$ cd /home/$usr_name/catkin_ws</code></pre>
+<pre><code>$ catkin_make ouster_ros</code></pre>
+
+혹은, catkin-tools를 이용하면 아래와 같이 컴파일 하면 된다.
+<pre><code>$ catkin build ouster_ros</code></pre>
+    
 ## 문제가 발생하는 이유?
 
 Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 있지 않고, 그로 인해 ROS 상에서 data를 받게 되면 error가 발생한다. 
@@ -10,10 +32,7 @@ Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 
 
 ## Solution
 
-1. Ouster 사에서 제공하는 driver를 git clone한다. (2020-01-09 기준)
-
-<code>git clone https://github.com/ouster-lidar/ouster_example</code>
-
+1. 
 2. Ouster_ros 안의msg/PacketMsg.msg내에 <code>Header header</code> 추가해야 함.
 
 3. Ouster_ros 안의msg/os1_node.cpp내에서  
@@ -26,7 +45,7 @@ Ouster 사에서 제공하는 driver내에서 msg 상에 header가 포함되어 
 
 원 파일의 일부분은 아래와 같다.
 
-## Solution
+
 
 <code>catkin make ouster_ros</code>
 
