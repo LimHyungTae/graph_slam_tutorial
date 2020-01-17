@@ -13,7 +13,6 @@
 1. 먼저, Ouster 사에서 제공하는 driver를 catkin_ws/src 내에서 git clone한다. (2020-01-09 기준)
 
 <pre><code>$ cd /home/$usr_name/catkin_ws/src</code></pre>
-
 <pre><code>$ git clone https://github.com/ouster-lidar/ouster_example</code></pre>
 
 2. 그 후 catkin_ws로 이동하여 complie해준다.
