@@ -1,14 +1,18 @@
 # 3D LiDAR Graph SLAM 튜토리얼
 
-아직 작성하지 않았습니다...
+연구실 내에 튜토리얼 자료로 구축 중...
+
+아직 작성하지 않았습니다 
+
+## WBU
 
 ## Description of rosbag file
 
 * Mode: 
 
-WBU
 
-자칼의 xyz가 이상함!!! 거꾸로 가는듯한 느낌이 있음
+
+자칼의 xyz가 기존의 로봇들과 좀 다름!!! 거꾸로 가는듯한 느낌이 있음
 
 
 ## rosbag
