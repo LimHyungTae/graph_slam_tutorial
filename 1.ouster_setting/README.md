@@ -136,3 +136,13 @@ int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
 ```
 
 ## 결과
+
+수정 결과, driver를 launch로 실행시켰을 때 아래와 같이 패킷이 **/os1_cloud_node/points**과 **/os1_cloud_node/imu**로 잘 파싱되는 것을 확인할 수 있다.
+
+![ouster_after](/readme_materials/ouster_after.png)
+
+sensor_smgs/PointCloud2로 잘 파싱되어 있는 것을 확인할 수 있고, 바로 rviz를 통해서도 데이터를 육안으로 확인이 가능하다.
+
+![ouster_type](/readme_materials/ouster_type.png)
+
+![ouster_data](/readme_materials/ouster_data.gif)
