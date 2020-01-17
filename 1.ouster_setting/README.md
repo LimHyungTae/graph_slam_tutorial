@@ -22,8 +22,18 @@
 
 혹은, catkin-tools를 이용하면 아래와 같이 컴파일 하면 된다.
 <pre><code>$ catkin build ouster_ros</code></pre>
+
+## 드라이버를 통한 packet 파싱하기
+
+1. [여기](https://www.dropbox.com/s/9gofcgfzaa8oyft/ouster_example.bag?dl=0)를 통해 다운받은 bag 파일을 rosbag play를 통해서 실행을 시킨다.
+
+<pre><code>rosbag play ouster_example.bag --clock</code></pre>
+
+2. 그 후, driver상에서 제공해주는 launch file을 통해 data packet을 Ros 메세지로 변환할 수 있다.
+
+<pre><code>roslaunch /home/($user_name)/catkin_ws/src/ouster_example-master/ouster_ros/os1.launch replay:=true</code></pre>
     
-**그런데...막상 launch file을 실행하면 아래와 같이 문제가 발생한다**
+**그런데...막상 launch file을 실행하면 아래와 같이 문제가 발생한다!!!!**
     
 ![error_occurs](/readme_materials/ouster_error.png)    
     
