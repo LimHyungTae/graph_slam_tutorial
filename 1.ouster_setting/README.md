@@ -52,7 +52,7 @@ Ouster 사에서 제공하는 driver 내의 패킷 메세지 내에 msg 상에 h
 <pre><code>std_msgs/Header header</code>
 <code>uint8[] buf</code></pre>
 
-2. Ouster_ros 안의**src/os1_node.cpp**내에서 119번째 줄과 125번 줄에 
+2. Ouster_ros 안의**src/os1_node.cpp**내에서 118번째 줄과 123번 줄에 
 
 <pre><code>lidar_packet.header.stamp.fromSec(ros::Time::now().toSec());</code>
 <code>imu_packet.header.stamp.fromSec(ros::Time::now().toSec());</code></pre>
